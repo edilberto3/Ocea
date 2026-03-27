@@ -1,0 +1,1388 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Ocea — Ocean-Inspired Lifestyle Bags</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<!-- TOAST -->
+		<div id="toast" class="toast"></div>
+
+		<!-- VERTICAL SIDEBAR NAVIGATION -->
+		<nav class="sidebar-nav" id="navbar">
+			<div class="sidebar-top">
+				<a href="#" class="nav-logo" onclick="showPage('home')">
+					<span class="logo-text">ocea</span><span class="logo-wave">~</span>
+				</a>
+				<div class="nav-tagline">Ocean lifestyle</div>
+			</div>
+			<ul class="sidebar-links" id="navLinks">
+				<li>
+					<a href="#" onclick="showPage('home')" data-page="home"
+						><span class="nav-num">01</span
+						><span class="nav-label">Home</span></a
+					>
+				</li>
+				<li>
+					<a href="#" onclick="showPage('products')" data-page="products"
+						><span class="nav-num">02</span
+						><span class="nav-label">Products</span></a
+					>
+				</li>
+				<li>
+					<a href="#" onclick="showPage('about')" data-page="about"
+						><span class="nav-num">03</span
+						><span class="nav-label">About</span></a
+					>
+				</li>
+				<li>
+					<a href="#" onclick="showPage('contact')" data-page="contact"
+						><span class="nav-num">04</span
+						><span class="nav-label">Contact</span></a
+					>
+				</li>
+				<li>
+					<a href="#" onclick="showPage('team')" data-page="team"
+						><span class="nav-num">05</span
+						><span class="nav-label">Team</span></a
+					>
+				</li>
+				<li style="padding: 12px 20px">
+					<div class="search-wrap">
+						<input
+							type="text"
+							id="searchInput"
+							placeholder="Search..."
+							oninput="handleSearch(this.value)"
+						/>
+						<span class="search-icon">&#x2315;</span>
+						<div id="searchDropdown" class="search-dropdown hidden"></div>
+					</div>
+				</li>
+			</ul>
+			<div class="sidebar-bottom">
+				<div class="sidebar-actions">
+					<div class="sidebar-icon-row">
+						<button class="cart-btn" onclick="toggleCart()">
+							<svg
+								width="20"
+								height="20"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.5"
+							>
+								<path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+								<line x1="3" y1="6" x2="21" y2="6" />
+								<path d="M16 10a4 4 0 01-8 0" />
+							</svg>
+							<span class="cart-count" id="cartCount">0</span>
+						</button>
+						<button class="account-btn" onclick="toggleAccountMenu()">
+							<svg
+								width="20"
+								height="20"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.5"
+							>
+								<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+								<circle cx="12" cy="7" r="4" />
+							</svg>
+						</button>
+						<div class="account-menu hidden" id="accountMenu">
+							<div id="accountMenuContent"></div>
+						</div>
+					</div>
+				</div>
+				<div class="sidebar-social">
+					<a href="#">IG</a><a href="#">FB</a><a href="#">TK</a>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Mobile Header -->
+		<header class="mobile-header" id="mobileHeader">
+			<a href="#" class="nav-logo" onclick="showPage('home')">
+				<span class="logo-text">ocea</span><span class="logo-wave">~</span>
+			</a>
+			<div class="mobile-actions">
+				<button class="cart-btn" onclick="toggleCart()">
+					<svg
+						width="20"
+						height="20"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.5"
+					>
+						<path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+						<line x1="3" y1="6" x2="21" y2="6" />
+						<path d="M16 10a4 4 0 01-8 0" />
+					</svg>
+					<span class="cart-count" id="cartCountMobile">0</span>
+				</button>
+				<button class="burger-btn" onclick="toggleMobileNav()">
+					<span></span><span></span><span></span>
+				</button>
+			</div>
+		</header>
+
+		<div
+			class="mobile-nav-overlay hidden"
+			id="mobileNavOverlay"
+			onclick="toggleMobileNav()"
+		></div>
+		<div class="mobile-nav-drawer hidden" id="mobileNavDrawer">
+			<ul>
+				<li>
+					<a
+						href="#"
+						onclick="
+							toggleMobileNav();
+							showPage('home');
+						"
+						>Home</a
+					>
+				</li>
+				<li>
+					<a
+						href="#"
+						onclick="
+							toggleMobileNav();
+							showPage('products');
+						"
+						>Products</a
+					>
+				</li>
+				<li>
+					<a
+						href="#"
+						onclick="
+							toggleMobileNav();
+							showPage('about');
+						"
+						>About</a
+					>
+				</li>
+				<li>
+					<a
+						href="#"
+						onclick="
+							toggleMobileNav();
+							showPage('contact');
+						"
+						>Contact</a
+					>
+				</li>
+				<li>
+					<a
+						href="#"
+						onclick="
+							toggleMobileNav();
+							showPage('team');
+						"
+						>Team</a
+					>
+				</li>
+				<li>
+					<a
+						href="#"
+						onclick="
+							toggleMobileNav();
+							showPage('auth');
+						"
+						>Sign In</a
+					>
+				</li>
+			</ul>
+		</div>
+
+		<!-- CART SIDEBAR -->
+		<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+		<div class="cart-sidebar" id="cartSidebar">
+			<div class="cart-header">
+				<h3>Your Basket</h3>
+				<button onclick="toggleCart()" class="cart-close">&#x2715;</button>
+			</div>
+			<div class="cart-items" id="cartItems"></div>
+			<div class="cart-footer">
+				<div class="cart-total">
+					<span>Total</span><span id="cartTotal">&#8369;0</span>
+				</div>
+				<button class="btn-primary full" onclick="checkout()">
+					Proceed to Checkout
+				</button>
+			</div>
+		</div>
+
+		<!-- MAIN CONTENT -->
+		<main class="main-content">
+			<!-- ====== HOME ====== -->
+			<div id="page-home" class="page active">
+				<!-- HERO: Split screen -->
+				<section class="hero-split">
+					<div class="hero-split-text">
+						<p class="hero-eyebrow">New Collection 2025</p>
+						<h1 class="hero-title">Where the <em>Ocean</em> Meets Style</h1>
+						<p class="hero-sub">
+							Eco-conscious bags that transform with sunlight &amp; water
+							&mdash; carrying the sea wherever you go.
+						</p>
+						<div class="hero-ctas">
+							<button class="btn-primary" onclick="showPage('products')">
+								Shop the Collection
+							</button>
+							<button class="btn-ghost" onclick="showPage('about')">
+								Our Story
+							</button>
+						</div>
+						<div class="hero-stats-row">
+							<div class="hstat">
+								<span class="hstat-n">100%</span
+								><span class="hstat-l">Eco-Conscious</span>
+							</div>
+							<div class="hstat-div"></div>
+							<div class="hstat">
+								<span class="hstat-n">PH</span
+								><span class="hstat-l">Made in PH</span>
+							</div>
+							<div class="hstat-div"></div>
+							<div class="hstat">
+								<span class="hstat-n">Free</span
+								><span class="hstat-l">Ship &gt;&#8369;3k</span>
+							</div>
+						</div>
+					</div>
+					<div class="hero-split-visual">
+						<div class="hero-img-stack">
+							<div class="hero-img-main">
+								<img src="Totebag.jpg" alt="Ocea WaveReveal Tote" />
+							</div>
+							<div class="hero-img-accent">
+								<img src="Backpack.png" alt="Ocea Backpack" />
+							</div>
+							<div class="hero-badge-float">
+								<span>Color-Changing</span><span>Technology</span>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- MARQUEE -->
+				<div class="marquee-strip">
+					<div class="marquee-inner">
+						<span>Ocea WaveReveal Technology</span
+						><span class="marquee-dot">&#x2726;</span>
+						<span>Eco-Conscious Materials</span
+						><span class="marquee-dot">&#x2726;</span>
+						<span>Proudly Filipino Brand</span
+						><span class="marquee-dot">&#x2726;</span>
+						<span>Free Shipping Over &#8369;3,000</span
+						><span class="marquee-dot">&#x2726;</span>
+						<span>Ocea WaveReveal Technology</span
+						><span class="marquee-dot">&#x2726;</span>
+						<span>Eco-Conscious Materials</span
+						><span class="marquee-dot">&#x2726;</span>
+						<span>Proudly Filipino Brand</span
+						><span class="marquee-dot">&#x2726;</span>
+						<span>Free Shipping Over &#8369;3,000</span
+						><span class="marquee-dot">&#x2726;</span>
+					</div>
+				</div>
+
+				<!-- FEATURED: Editorial grid -->
+				<section class="featured-editorial">
+					<div class="featured-header-row">
+						<div class="featured-header-text">
+							<p class="eyebrow">Curated for You</p>
+							<h2>Featured <em>Products</em></h2>
+						</div>
+						<button class="btn-outline" onclick="showPage('products')">
+							View All &rarr;
+						</button>
+					</div>
+					<div class="featured-editorial-grid" id="featuredGrid"></div>
+				</section>
+
+				<!-- CATEGORIES: Horizontal scroll -->
+				<section class="categories-strip-section">
+					<div class="categories-strip-header">
+						<p class="eyebrow">Browse by Category</p>
+						<h2>Shop Categories</h2>
+					</div>
+					<div class="categories-horizontal">
+						<div class="cat-strip-card" onclick="filterAndShow('Tote Bags')">
+							<img src="Oceatote.png" alt="Tote Bags" />
+							<div class="cat-strip-info">
+								<h3>Tote Bags</h3>
+								<span class="cat-arrow">&rarr;</span>
+							</div>
+						</div>
+						<div class="cat-strip-card" onclick="filterAndShow('Backpacks')">
+							<img src="Backpack.png" alt="Backpacks" />
+							<div class="cat-strip-info">
+								<h3>Backpacks</h3>
+								<span class="cat-arrow">&rarr;</span>
+							</div>
+						</div>
+						<div class="cat-strip-card" onclick="filterAndShow('Accessories')">
+							<img src="Accessories.png" alt="Accessories" />
+							<div class="cat-strip-info">
+								<h3>Accessories</h3>
+								<span class="cat-arrow">&rarr;</span>
+							</div>
+						</div>
+						<div class="cat-strip-card" onclick="filterAndShow('Eco Bags')">
+							<img src="EcoBag.png" alt="Eco Bags" />
+							<div class="cat-strip-info">
+								<h3>Eco Bags</h3>
+								<span class="cat-arrow">&rarr;</span>
+							</div>
+						</div>
+						<div
+							class="cat-strip-card"
+							onclick="filterAndShow('Limited Edition')"
+						>
+							<img src="Coastal.png" alt="Limited Edition" />
+							<div class="cat-strip-info">
+								<h3>Limited Edition</h3>
+								<span class="cat-arrow">&rarr;</span>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- REVIEWS: Mosaic -->
+				<section class="reviews-mosaic-section">
+					<div class="reviews-mosaic-header">
+						<div>
+							<p class="eyebrow">What Customers Say</p>
+							<h2>Reviews &amp; Feedback</h2>
+						</div>
+						<button class="btn-outline" onclick="openReviewModal()">
+							Leave a Review &#x2726;
+						</button>
+					</div>
+					<div class="reviews-mosaic" id="reviewsGrid"></div>
+				</section>
+			</div>
+
+			<!-- ====== PRODUCTS ====== -->
+			<div id="page-products" class="page">
+				<div class="page-banner">
+					<div class="page-banner-label">
+						<span>02</span><span>Products</span>
+					</div>
+					<div class="page-banner-content">
+						<h1>Our Collection</h1>
+						<p>Ocean-inspired designs for the conscious explorer</p>
+					</div>
+					<div class="page-banner-deco"></div>
+				</div>
+				<section class="products-layout">
+					<aside class="filter-sidebar">
+						<p class="filter-sidebar-title">Filter</p>
+						<div class="filter-sidebar-group" id="filterTabs">
+							<button
+								class="filter-side-btn active"
+								onclick="setFilter('All', this)"
+							>
+								All Products
+							</button>
+							<button
+								class="filter-side-btn"
+								onclick="setFilter('Tote Bags', this)"
+							>
+								Tote Bags
+							</button>
+							<button
+								class="filter-side-btn"
+								onclick="setFilter('Backpacks', this)"
+							>
+								Backpacks
+							</button>
+							<button
+								class="filter-side-btn"
+								onclick="setFilter('Accessories', this)"
+							>
+								Accessories
+							</button>
+							<button
+								class="filter-side-btn"
+								onclick="setFilter('Eco Bags', this)"
+							>
+								Eco Bags
+							</button>
+							<button
+								class="filter-side-btn"
+								onclick="setFilter('Limited Edition', this)"
+							>
+								Limited Edition
+							</button>
+						</div>
+						<div class="filter-sidebar-sort">
+							<p class="filter-sidebar-title">Sort</p>
+							<select
+								id="sortSelect"
+								onchange="applySort()"
+								class="sort-select"
+							>
+								<option value="default">Default</option>
+								<option value="price-asc">Price: Low to High</option>
+								<option value="price-desc">Price: High to Low</option>
+								<option value="name">Name A&ndash;Z</option>
+							</select>
+						</div>
+					</aside>
+					<div class="products-grid-area">
+						<div class="products-grid" id="productsGrid"></div>
+					</div>
+				</section>
+			</div>
+
+			<div id="page-product-detail" class="page">
+				<div id="productDetailContent"></div>
+			</div>
+
+			<div id="page-about" class="page">
+				<div class="page-banner">
+					<div class="page-banner-label"><span>03</span><span>About</span></div>
+					<div class="page-banner-content">
+						<h1>Our Story</h1>
+						<p>
+							Born from a love of the ocean and a commitment to sustainability
+						</p>
+					</div>
+					<div class="page-banner-deco"></div>
+				</div>
+
+				<div class="about-story-block">
+					<div class="about-story-img">
+						<img src="All.png" alt="Ocea Products" />
+						<div class="about-img-caption">Handcrafted in the Philippines</div>
+					</div>
+					<div class="about-story-text">
+						<p class="eyebrow">The Beginning</p>
+						<h2>More Than a Bag Brand</h2>
+						<p>
+							Ocea was founded with a simple belief: that everyday items should
+							carry meaning. Inspired by the beauty of Philippine coastlines
+							&mdash; from the turquoise waters of Palawan to the golden sands
+							of Siargao &mdash; we create bags that are as alive as the ocean
+							itself.
+						</p>
+						<p>
+							Our signature <strong>WaveReveal technology</strong> uses
+							photochromic and hydrochromic inks to transform a simple beige
+							tote into a vibrant ocean masterpiece when exposed to sunlight or
+							water.
+						</p>
+						<p>
+							Every product is crafted with eco-conscious materials &mdash;
+							sustainable canvas, recycled handles, and water-based dyes &mdash;
+							because we understand that loving the ocean means protecting it.
+						</p>
+					</div>
+				</div>
+
+				<div class="vmv-section">
+					<div class="vmv-tabs">
+						<button class="vmv-tab active" onclick="switchVMV(this, 'vision')">
+							Vision
+						</button>
+						<button class="vmv-tab" onclick="switchVMV(this, 'mission')">
+							Mission
+						</button>
+						<button class="vmv-tab" onclick="switchVMV(this, 'values')">
+							Values
+						</button>
+					</div>
+					<div class="vmv-panels">
+						<div class="vmv-panel active" id="vmv-vision">
+							<div class="vmv-icon">&#x25C8;</div>
+							<h3>Our Vision</h3>
+							<p>
+								To be the leading ocean-inspired lifestyle brand in Southeast
+								Asia, recognized for our innovative designs, sustainable
+								practices, and our commitment to preserving the beauty of our
+								coastal environments for generations to come.
+							</p>
+						</div>
+						<div class="vmv-panel hidden" id="vmv-mission">
+							<div class="vmv-icon">&#x25C7;</div>
+							<h3>Our Mission</h3>
+							<p>
+								To craft premium, eco-conscious bags and accessories that
+								connect people to the ocean's beauty through innovative
+								color-changing technology &mdash; while championing sustainable
+								living and supporting coastal communities across the
+								Philippines.
+							</p>
+						</div>
+						<div class="vmv-panel hidden" id="vmv-values">
+							<div class="vmv-icon">&#x25C6;</div>
+							<h3>Our Values</h3>
+							<p>
+								Sustainability first. Quality without compromise. Design with
+								purpose. We believe every product should tell a story &mdash; of
+								the ocean, of craftsmanship, and of a world worth protecting.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="suppliers-full-section">
+					<div class="suppliers-accent-strip">
+						<p class="eyebrow">Transparency</p>
+						<h2>Our Suppliers</h2>
+					</div>
+					<div class="suppliers-table-wrap">
+						<table class="suppliers-table">
+							<thead>
+								<tr>
+									<th>Supplier</th>
+									<th>Materials</th>
+									<th>Location</th>
+									<th>Certification</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>EcoWeave Philippines</td>
+									<td>Organic Cotton Canvas</td>
+									<td>Cebu City, PH</td>
+									<td>GOTS Certified</td>
+								</tr>
+								<tr>
+									<td>ChromaTech Solutions</td>
+									<td>Photochromic / Hydrochromic Inks</td>
+									<td>Manila, PH</td>
+									<td>ISO 9001</td>
+								</tr>
+								<tr>
+									<td>LeatherCraft Davao</td>
+									<td>Vegetable-Tanned Leather Straps</td>
+									<td>Davao City, PH</td>
+									<td>LWG Certified</td>
+								</tr>
+								<tr>
+									<td>GreenSteel Corp.</td>
+									<td>Stainless Steel (Bottles)</td>
+									<td>Batangas, PH</td>
+									<td>SGS Verified</td>
+								</tr>
+								<tr>
+									<td>NaturaDye Co.</td>
+									<td>Water-Based Eco Dyes</td>
+									<td>Iloilo, PH</td>
+									<td>OEKO-TEX&reg;</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<!-- ====== CONTACT ====== -->
+			<div id="page-contact" class="page">
+				<div class="page-banner">
+					<div class="page-banner-label">
+						<span>04</span><span>Contact</span>
+					</div>
+					<div class="page-banner-content">
+						<h1>Get in Touch</h1>
+						<p>We'd love to hear from you</p>
+					</div>
+					<div class="page-banner-deco"></div>
+				</div>
+
+				<div class="contact-fullwidth">
+					<div class="contact-info-bar">
+						<div class="contact-info-item">
+							<span class="c-icon">&#x2709;</span>
+							<div>
+								<p class="c-label">Email</p>
+								<p>hello@oceabags.ph</p>
+							</div>
+						</div>
+						<div class="contact-divider"></div>
+						<div class="contact-info-item">
+							<span class="c-icon">&#x260E;</span>
+							<div>
+								<p class="c-label">Phone</p>
+								<p>+63 917 888 2299</p>
+							</div>
+						</div>
+						<div class="contact-divider"></div>
+						<div class="contact-info-item">
+							<span class="c-icon">&#x2316;</span>
+							<div>
+								<p class="c-label">Address</p>
+								<p>
+									Asian College of Technology &ndash; IEF, Cebu City,
+									Philippines
+								</p>
+							</div>
+						</div>
+						<div class="contact-divider"></div>
+						<div class="contact-info-item">
+							<span class="c-icon">&#x25C8;</span>
+							<div>
+								<p class="c-label">Follow Us</p>
+								<div class="social-links-row">
+									<a href="#">Instagram</a><a href="#">Facebook</a
+									><a href="#">TikTok</a><a href="#">Shopee</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="contact-form-full">
+						<div class="contact-form-inner">
+							<h3>Send a Message</h3>
+							<form class="contact-form" onsubmit="submitContact(event)">
+								<div class="form-row-3">
+									<div class="form-group">
+										<label>Name</label
+										><input type="text" required placeholder="Your full name" />
+									</div>
+									<div class="form-group">
+										<label>Email</label
+										><input
+											type="email"
+											required
+											placeholder="your@email.com"
+										/>
+									</div>
+									<div class="form-group">
+										<label>Subject</label
+										><input
+											type="text"
+											required
+											placeholder="What's this about?"
+										/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label>Message</label
+									><textarea
+										rows="6"
+										required
+										placeholder="Tell us what's on your mind..."
+									></textarea>
+								</div>
+								<button type="submit" class="btn-primary">
+									Send Message &rarr;
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- ====== TEAM ====== -->
+			<div id="page-team" class="page">
+				<div class="page-banner">
+					<div class="page-banner-label"><span>05</span><span>Team</span></div>
+					<div class="page-banner-content">
+						<h1>Meet the Team</h1>
+						<p>The people behind Ocea's wave</p>
+					</div>
+					<div class="page-banner-deco"></div>
+				</div>
+
+				<div class="team-spotlight">
+					<div class="team-spotlight-avatar">
+						<div class="avatar-placeholder ceo-bg large">A</div>
+					</div>
+					<div class="team-spotlight-info">
+						<span class="team-role ceo-role">Founder &amp; CEO</span>
+						<h2>Liz Angel Villegas Caburnay</h2>
+						<p>
+							Visionary behind Ocea's ocean-inspired mission. Leads brand
+							strategy and product innovation.
+						</p>
+					</div>
+					<div class="team-spotlight-deco">01</div>
+				</div>
+
+				<div class="team-tier-section">
+					<div class="team-tier-label">Management</div>
+					<div class="team-tier-cards">
+						<div class="team-horizontal-card">
+							<div class="avatar-placeholder mgr-bg">B</div>
+							<div class="thc-info">
+								<span class="team-role mgr-role">Operations Manager</span>
+								<h4>Pinky Lei Betcher</h4>
+								<p>
+									Oversees supply chain, inventory management, and day-to-day
+									operations.
+								</p>
+							</div>
+						</div>
+						<div class="team-horizontal-card">
+							<div class="avatar-placeholder mgr-bg">C</div>
+							<div class="thc-info">
+								<span class="team-role mgr-role">Marketing Manager</span>
+								<h4>Pinky Lei Betcher</h4>
+								<p>
+									Drives brand awareness, social media campaigns, and customer
+									engagement.
+								</p>
+							</div>
+						</div>
+						<div class="team-horizontal-card">
+							<div class="avatar-placeholder mgr-bg">D</div>
+							<div class="thc-info">
+								<span class="team-role mgr-role">Finance Manager</span>
+								<h4>Pinky Lei Betcher</h4>
+								<p>
+									Manages financial planning, budgeting, and supplier payments.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="team-tier-section">
+					<div class="team-tier-label">Staff</div>
+					<div class="team-staff-tiles">
+						<div class="team-staff-tile">
+							<div class="avatar-placeholder staff-bg small">E</div>
+							<h4>Noramie Resurreccion</h4>
+							<span class="team-role staff-role">Product Designer</span>
+						</div>
+						<div class="team-staff-tile">
+							<div class="avatar-placeholder staff-bg small">F</div>
+							<h4>Noramie Resurreccion</h4>
+							<span class="team-role staff-role">Web Developer</span>
+						</div>
+						<div class="team-staff-tile">
+							<div class="avatar-placeholder staff-bg small">G</div>
+							<h4>Noramie Resurreccion</h4>
+							<span class="team-role staff-role">Customer Support</span>
+						</div>
+						<div class="team-staff-tile">
+							<div class="avatar-placeholder staff-bg small">H</div>
+							<h4>Noramie Resurreccion</h4>
+							<span class="team-role staff-role">Logistics Staff</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- ====== AUTH ====== -->
+			<div id="page-auth" class="page">
+				<section class="auth-section">
+					<div class="auth-split">
+						<div class="auth-split-visual">
+							<div class="auth-visual-content">
+								<span class="logo-text" style="font-size: 3rem; color: #fff"
+									>ocea</span
+								><span
+									class="logo-wave"
+									style="font-size: 2rem; color: var(--teal)"
+									>~</span
+								>
+								<p
+									style="
+										color: rgba(255, 255, 255, 0.7);
+										margin-top: 20px;
+										font-size: 0.9rem;
+									"
+								>
+									Ocean-inspired lifestyle bags crafted for the conscious
+									explorer.
+								</p>
+							</div>
+						</div>
+						<div class="auth-split-form">
+							<div class="auth-card">
+								<div class="auth-tabs">
+									<button class="auth-tab active" onclick="switchAuth('login')">
+										Sign In
+									</button>
+									<button class="auth-tab" onclick="switchAuth('register')">
+										Register
+									</button>
+								</div>
+								<div id="authLogin">
+									<h2>Welcome Back</h2>
+									<p class="auth-sub">Sign in to your Ocea account</p>
+									<div class="form-group">
+										<label>Email</label
+										><input
+											type="email"
+											id="loginEmail"
+											placeholder="your@email.com"
+										/>
+									</div>
+									<div class="form-group">
+										<label>Password</label
+										><input
+											type="password"
+											id="loginPass"
+											placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+										/>
+									</div>
+									<button class="btn-primary full" onclick="doLogin()">
+										Sign In
+									</button>
+									<div class="auth-hint">
+										<p>Admin: admin@ocea.ph / admin123</p>
+										<p>User: user@ocea.ph / user123</p>
+									</div>
+								</div>
+								<div id="authRegister" class="hidden">
+									<h2>Create Account</h2>
+									<p class="auth-sub">Join the Ocea community</p>
+									<div class="form-row">
+										<div class="form-group">
+											<label>First Name</label
+											><input type="text" id="regFirst" placeholder="Andrea" />
+										</div>
+										<div class="form-group">
+											<label>Last Name</label
+											><input type="text" id="regLast" placeholder="Cruz" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label>Email</label
+										><input
+											type="email"
+											id="regEmail"
+											placeholder="your@email.com"
+										/>
+									</div>
+									<div class="form-group">
+										<label>Password</label
+										><input
+											type="password"
+											id="regPass"
+											placeholder="Create a strong password"
+										/>
+									</div>
+									<button class="btn-primary full" onclick="doRegister()">
+										Create Account
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+
+			<!-- ====== USER DASHBOARD ====== -->
+			<div id="page-dashboard" class="page">
+				<div class="page-banner">
+					<div class="page-banner-label">
+						<span>&mdash;</span><span>Account</span>
+					</div>
+					<div class="page-banner-content">
+						<h1>My Account</h1>
+						<p id="dashWelcome">Welcome back!</p>
+					</div>
+					<div class="page-banner-deco"></div>
+				</div>
+				<section class="section">
+					<div class="dashboard-grid">
+						<div class="dashboard-sidebar">
+							<nav class="dash-nav">
+								<button
+									class="dash-nav-btn active"
+									onclick="switchDash('orders')"
+								>
+									&#x1F4E6; My Orders
+								</button>
+								<button class="dash-nav-btn" onclick="switchDash('profile')">
+									&#x1F464; My Profile
+								</button>
+								<button class="dash-nav-btn" onclick="switchDash('wishlist')">
+									&#x2661; Wishlist
+								</button>
+								<button class="dash-nav-btn danger" onclick="doLogout()">
+									&#x238B; Sign Out
+								</button>
+							</nav>
+						</div>
+						<div class="dashboard-content" id="dashContent">
+							<div id="dash-orders">
+								<h3>Order History</h3>
+								<div id="ordersList"></div>
+							</div>
+							<div id="dash-profile" class="hidden">
+								<h3>My Profile</h3>
+								<div id="profileContent"></div>
+							</div>
+							<div id="dash-wishlist" class="hidden">
+								<h3>Wishlist</h3>
+								<p class="muted">No items in your wishlist yet.</p>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+
+			<!-- ====== ADMIN ====== -->
+			<div id="page-admin" class="page">
+				<div class="admin-layout">
+					<aside class="admin-sidebar">
+						<div class="admin-brand">
+							<span class="logo-text">ocea</span
+							><span
+								style="color: var(--gold); font-size: 12px; margin-left: 4px"
+								>ADMIN</span
+							>
+						</div>
+						<nav class="admin-nav">
+							<button
+								class="admin-nav-btn active"
+								onclick="switchAdmin('overview')"
+							>
+								&#x25C8; Overview
+							</button>
+							<button class="admin-nav-btn" onclick="switchAdmin('sales')">
+								&#8369; Sales
+							</button>
+							<button class="admin-nav-btn" onclick="switchAdmin('inventory')">
+								&#x229E; Inventory
+							</button>
+							<button class="admin-nav-btn" onclick="switchAdmin('orders')">
+								&#x1F4E6; Orders
+							</button>
+							<button class="admin-nav-btn" onclick="switchAdmin('suppliers')">
+								&#x26DF; Suppliers
+							</button>
+							<button class="admin-nav-btn" onclick="switchAdmin('reports')">
+								&#x1F4CA; Reports
+							</button>
+							<button class="admin-nav-btn" onclick="switchAdmin('users')">
+								&#x1F465; Users
+							</button>
+							<button class="admin-nav-btn danger" onclick="doLogout()">
+								&#x238B; Logout
+							</button>
+						</nav>
+					</aside>
+					<main class="admin-main">
+						<div id="admin-overview" class="admin-panel">
+							<h2>Dashboard Overview</h2>
+							<div class="admin-stats">
+								<div class="stat-card">
+									<p class="stat-label">Total Revenue</p>
+									<p class="stat-value">&#8369;128,450</p>
+									<p class="stat-change positive">+12.4% this month</p>
+								</div>
+								<div class="stat-card">
+									<p class="stat-label">Orders</p>
+									<p class="stat-value">284</p>
+									<p class="stat-change positive">+8 today</p>
+								</div>
+								<div class="stat-card">
+									<p class="stat-label">Products</p>
+									<p class="stat-value">6</p>
+									<p class="stat-change">Active listings</p>
+								</div>
+								<div class="stat-card">
+									<p class="stat-label">Customers</p>
+									<p class="stat-value">412</p>
+									<p class="stat-change positive">+23 this week</p>
+								</div>
+							</div>
+							<div class="admin-recent">
+								<h3>Recent Orders</h3>
+								<div id="adminRecentOrders"></div>
+							</div>
+						</div>
+						<div id="admin-sales" class="admin-panel hidden">
+							<h2>Sales Analytics</h2>
+							<div class="sales-summary">
+								<div class="stat-card">
+									<p class="stat-label">Today's Sales</p>
+									<p class="stat-value">&#8369;8,240</p>
+								</div>
+								<div class="stat-card">
+									<p class="stat-label">This Week</p>
+									<p class="stat-value">&#8369;42,180</p>
+								</div>
+								<div class="stat-card">
+									<p class="stat-label">This Month</p>
+									<p class="stat-value">&#8369;128,450</p>
+								</div>
+								<div class="stat-card">
+									<p class="stat-label">This Year</p>
+									<p class="stat-value">&#8369;896,200</p>
+								</div>
+							</div>
+							<h3>Sales by Product</h3>
+							<div class="sales-chart" id="salesChart"></div>
+						</div>
+						<div id="admin-inventory" class="admin-panel hidden">
+							<h2>Inventory Management</h2>
+							<div id="inventoryTable"></div>
+						</div>
+						<div id="admin-orders" class="admin-panel hidden">
+							<h2>All Orders</h2>
+							<div id="adminOrdersTable"></div>
+						</div>
+						<div id="admin-suppliers" class="admin-panel hidden">
+							<h2>Supplier Management</h2>
+							<div id="suppliersTable"></div>
+						</div>
+						<div id="admin-reports" class="admin-panel hidden">
+							<h2>Reports</h2>
+							<div class="reports-grid">
+								<div class="report-card">
+									<h4>Monthly Revenue Report</h4>
+									<p>
+										March 2025 &mdash; &#8369;128,450 total revenue across 6
+										products and 284 orders.
+									</p>
+									<button
+										class="btn-outline sm"
+										onclick="showToast('Report downloaded!')"
+									>
+										Download PDF
+									</button>
+								</div>
+								<div class="report-card">
+									<h4>Inventory Status Report</h4>
+									<p>
+										2 products with low stock. Reorder recommended for: Limited
+										Edition Coastal Plaid Tote.
+									</p>
+									<button
+										class="btn-outline sm"
+										onclick="showToast('Report downloaded!')"
+									>
+										Download PDF
+									</button>
+								</div>
+								<div class="report-card">
+									<h4>Customer Analytics</h4>
+									<p>
+										412 total customers. 68% repeat buyers. Average order value:
+										&#8369;2,847.
+									</p>
+									<button
+										class="btn-outline sm"
+										onclick="showToast('Report downloaded!')"
+									>
+										Download PDF
+									</button>
+								</div>
+								<div class="report-card">
+									<h4>Supplier Performance</h4>
+									<p>
+										5 active suppliers. Average lead time: 7 days. On-time
+										delivery rate: 94%.
+									</p>
+									<button
+										class="btn-outline sm"
+										onclick="showToast('Report downloaded!')"
+									>
+										Download PDF
+									</button>
+								</div>
+							</div>
+						</div>
+						<div id="admin-users" class="admin-panel hidden">
+							<h2>User Management</h2>
+							<div id="usersTable"></div>
+						</div>
+					</main>
+				</div>
+			</div>
+
+			<!-- ====== ORDER TRACKING ====== -->
+			<div id="page-tracking" class="page">
+				<div class="page-banner">
+					<div class="page-banner-label">
+						<span>&mdash;</span><span>Track</span>
+					</div>
+					<div class="page-banner-content">
+						<h1>Order Tracking</h1>
+						<p>Track your Ocea orders in real-time</p>
+					</div>
+					<div class="page-banner-deco"></div>
+				</div>
+				<section class="section">
+					<div class="tracking-wrap">
+						<div class="form-group">
+							<label>Enter Order ID</label>
+							<div style="display: flex; gap: 10px">
+								<input
+									type="text"
+									id="trackingInput"
+									placeholder="e.g. OC-2025-001"
+								/><button class="btn-primary" onclick="trackOrder()">
+									Track
+								</button>
+							</div>
+						</div>
+						<div id="trackingResult"></div>
+					</div>
+				</section>
+			</div>
+
+			<!-- ====== CHECKOUT ====== -->
+			<div id="page-checkout" class="page">
+				<div class="page-banner">
+					<div class="page-banner-label">
+						<span>&mdash;</span><span>Checkout</span>
+					</div>
+					<div class="page-banner-content">
+						<h1>Checkout</h1>
+						<p>Almost there &mdash; complete your order</p>
+					</div>
+					<div class="page-banner-deco"></div>
+				</div>
+				<section class="section">
+					<div class="checkout-grid">
+						<div class="checkout-form">
+							<h3>Shipping Information</h3>
+							<div class="form-row">
+								<div class="form-group">
+									<label>First Name</label
+									><input type="text" id="co-first" placeholder="Andrea" />
+								</div>
+								<div class="form-group">
+									<label>Last Name</label
+									><input type="text" id="co-last" placeholder="Cruz" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label>Email</label
+								><input
+									type="email"
+									id="co-email"
+									placeholder="your@email.com"
+								/>
+							</div>
+							<div class="form-group">
+								<label>Phone</label
+								><input
+									type="text"
+									id="co-phone"
+									placeholder="+63 9xx xxx xxxx"
+								/>
+							</div>
+							<div class="form-group">
+								<label>Address</label
+								><input
+									type="text"
+									id="co-address"
+									placeholder="Street, Barangay"
+								/>
+							</div>
+							<div class="form-row">
+								<div class="form-group">
+									<label>City</label
+									><input type="text" id="co-city" placeholder="Cebu City" />
+								</div>
+								<div class="form-group">
+									<label>Province</label
+									><input type="text" id="co-province" placeholder="Cebu" />
+								</div>
+							</div>
+							<h3 style="margin-top: 2rem">Payment Method</h3>
+							<div class="payment-options">
+								<label class="payment-option"
+									><input
+										type="radio"
+										name="payment"
+										value="gcash"
+										checked
+									/><span>GCash</span></label
+								>
+								<label class="payment-option"
+									><input type="radio" name="payment" value="cod" /><span
+										>Cash on Delivery</span
+									></label
+								>
+								<label class="payment-option"
+									><input type="radio" name="payment" value="card" /><span
+										>Credit/Debit Card</span
+									></label
+								>
+							</div>
+							<button
+								class="btn-primary full"
+								onclick="placeOrder()"
+								style="margin-top: 2rem"
+							>
+								Place Order &rarr;
+							</button>
+						</div>
+						<div class="checkout-summary">
+							<h3>Order Summary</h3>
+							<div id="checkoutItems"></div>
+							<div class="checkout-total">
+								<div class="ct-row">
+									<span>Subtotal</span><span id="coSubtotal">&#8369;0</span>
+								</div>
+								<div class="ct-row">
+									<span>Shipping</span><span>&#8369;150</span>
+								</div>
+								<div class="ct-row total">
+									<span>Total</span><span id="coTotal">&#8369;150</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+
+			<!-- REVIEW MODAL -->
+			<div class="modal-overlay hidden" id="reviewModal">
+				<div class="modal">
+					<div class="modal-header">
+						<h3>Write a Review</h3>
+						<button onclick="closeReviewModal()" class="modal-close">
+							&#x2715;
+						</button>
+					</div>
+					<div class="form-group">
+						<label>Your Name</label
+						><input type="text" id="revName" placeholder="Name" />
+					</div>
+					<div class="form-group">
+						<label>Rating</label>
+						<div class="star-rating" id="starRating">
+							<span class="star" onclick="setRating(1)">&#x2605;</span>
+							<span class="star" onclick="setRating(2)">&#x2605;</span>
+							<span class="star" onclick="setRating(3)">&#x2605;</span>
+							<span class="star" onclick="setRating(4)">&#x2605;</span>
+							<span class="star" onclick="setRating(5)">&#x2605;</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Product</label>
+						<select id="revProduct">
+							<option>Ocea WaveReveal Tote</option>
+							<option>Ocea Sandscape Backpack</option>
+							<option>Accessories Bundle</option>
+							<option>Ocea Green Duo Eco Bags</option>
+							<option>Limited Edition Coastal Plaid Tote</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>Review</label
+						><textarea
+							id="revText"
+							rows="4"
+							placeholder="Share your experience..."
+						></textarea>
+					</div>
+					<button class="btn-primary full" onclick="submitReview()">
+						Submit Review
+					</button>
+				</div>
+			</div>
+
+			<!-- FOOTER -->
+			<footer class="footer">
+				<div class="footer-top-bar">
+					<div class="footer-logo-block">
+						<div class="footer-logo">
+							<span class="logo-text">ocea</span
+							><span class="logo-wave">~</span>
+						</div>
+						<p>
+							Ocean-inspired lifestyle bags crafted for the conscious explorer.
+							Proudly made in the Philippines.
+						</p>
+					</div>
+					<div class="footer-cta-block">
+						<p>Discover our latest collection</p>
+						<button
+							class="btn-outline"
+							onclick="showPage('products')"
+							style="border-color: rgba(255, 255, 255, 0.3); color: #fff"
+						>
+							Shop Now &rarr;
+						</button>
+					</div>
+				</div>
+				<div class="footer-links-row">
+					<div class="footer-links">
+						<h4>Shop</h4>
+						<a href="#" onclick="showPage('products')">All Products</a>
+						<a href="#" onclick="filterAndShow('Tote Bags')">Tote Bags</a>
+						<a href="#" onclick="filterAndShow('Backpacks')">Backpacks</a>
+						<a href="#" onclick="filterAndShow('Limited Edition')"
+							>Limited Edition</a
+						>
+					</div>
+					<div class="footer-links">
+						<h4>Company</h4>
+						<a href="#" onclick="showPage('about')">About Us</a>
+						<a href="#" onclick="showPage('team')">Our Team</a>
+						<a href="#" onclick="showPage('contact')">Contact</a>
+						<a href="#" onclick="showPage('tracking')">Track Order</a>
+					</div>
+					<div class="footer-links">
+						<h4>Connect</h4>
+						<a href="#">Instagram</a><a href="#">Facebook</a
+						><a href="#">TikTok</a><a href="#">Shopee</a>
+					</div>
+					<div class="footer-stats">
+						<div class="footer-stat">
+							<span class="stat-num">5+</span
+							><span class="stat-label">Categories</span>
+						</div>
+						<div class="footer-stat">
+							<span class="stat-num">100%</span
+							><span class="stat-label">Eco-Conscious</span>
+						</div>
+					</div>
+				</div>
+				<div class="footer-bottom">
+					<p>
+						&copy; 2025 Ocea Lifestyle Co. &mdash; Asian College of Technology
+						&ndash; IEF, Cebu City, Philippines
+					</p>
+				</div>
+			</footer>
+		</main>
+
+		<script src="app.js"></script>
+		<script>
+			function switchVMV(btn, id) {
+				document
+					.querySelectorAll(".vmv-tab")
+					.forEach((b) => b.classList.remove("active"));
+				document.querySelectorAll(".vmv-panel").forEach((p) => {
+					p.classList.remove("active");
+					p.classList.add("hidden");
+				});
+				btn.classList.add("active");
+				document.getElementById("vmv-" + id).classList.remove("hidden");
+				document.getElementById("vmv-" + id).classList.add("active");
+			}
+			function toggleMobileNav() {
+				document.getElementById("mobileNavDrawer").classList.toggle("hidden");
+				document.getElementById("mobileNavOverlay").classList.toggle("hidden");
+			}
+			const _origUpdateCartCount =
+				typeof updateCartCount !== "undefined" ? updateCartCount : null;
+			function syncMobileCart() {
+				const count = cart.reduce((s, i) => s + i.qty, 0);
+				const el2 = document.getElementById("cartCountMobile");
+				if (el2) el2.textContent = count;
+			}
+			document.addEventListener("DOMContentLoaded", () => {
+				syncMobileCart();
+			});
+		</script>
+	</body>
+</html>
