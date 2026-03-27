@@ -44,7 +44,7 @@ const PRODUCTS = [
 		name: "Ocea Green Duo Eco Bags",
 		category: "Eco Bags",
 		price: 999,
-		image: "EcoBag.png",
+		image: "Ecobag.png",
 		badge: "Eco Pick",
 		badgeClass: "",
 		description:
